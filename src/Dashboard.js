@@ -1,21 +1,40 @@
 import React, { useContext } from "react";
-import { Route } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { MenuContext } from "react-flexible-sliding-menu";
+import Products from "./Products";
+import Customers from "./Customers";
+import Orders from "./Orders";
 
 export default function Dashboard() {
-    const { toggleMenu } = useContext(MenuContext);
+  const { toggleMenu } = useContext(MenuContext);
+  const navigate = useNavigate();
+
+  const navigateToProducts = () => {
+    navigate('/products');
+  };
+
+  const navigateToOrders = () => {
+    navigate('/orders');
+  };
+
+  const navigateToCustomers = () => {
+    navigate('/orders');
+  };
+  
   return (
     <>
-        <h1>App: React Router</h1>
-      <p>This app uses react-router for it's navigation.</p>
-
-      <Route path="/dashboard" component={() => <h2>Home Component</h2>} />
-      <Route path="/dashboard" component={() => <h2>Dashboard Component</h2>} />
-      <Route path="/gallery" component={() => <h2>Gallery Component</h2>} />
-
-      <button onClick={toggleMenu} className="primary-button">
-        Toggle Menu
+    
+    <button onClick={toggleMenu} className="primary-button justify-content-right">
+        Slide Menu
       </button>
+      
+      <h1>Hi,{localStorage.getItem("username")}</h1>
+
+      <Routes>
+        <Route path="/products" onClick={navigateToProducts} element={ <Products /> } />
+        <Route path="/customers" onClick={navigateToCustomers} element={ <Customers /> }/>
+        <Route path="/orders" onClick={navigateToOrders} element={ <Orders /> } />
+      </Routes>
     </>
-  )
+  );
 }
