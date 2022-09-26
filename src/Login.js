@@ -24,7 +24,7 @@ export default function Login() {
           setLoginData(res.data.data);
           localStorage.setItem("username", res.data.data[0].username);
         } else {
-          console.log("Not WOrking");
+          alert("this is not correct");
         }
       })
       .catch((error) => console.log(error));
